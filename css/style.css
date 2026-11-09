@@ -69,10 +69,17 @@ a {
   outline: none;
 }
 
+*:focus-visible {
+  outline: 3px solid var(--cor-primaria);
+  outline-offset: 2px;
+}
+
 /* 3. Layout -------------------------------------------------------------- */
 .container {
-  width: 960px;
+  width: 100%;
+  max-width: var(--largura-max);
   margin-inline: auto;
+  padding-inline: 1rem;
 }
 
 main {
@@ -163,6 +170,7 @@ main {
   text-decoration: none;
   cursor: pointer;
   transition: background-color 0.2s, border-color 0.2s;
+  width: 100%;
 }
 
 .botao:hover:not(:disabled) {
@@ -176,6 +184,7 @@ main {
 }
 
 .botao--secundario {
+  width: auto;
   white-space: nowrap;
   background: transparent;
   color: var(--cor-primaria);
@@ -191,7 +200,7 @@ main {
 /* Formulário */
 .formulario {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 1.25rem;
 }
 
@@ -203,7 +212,8 @@ main {
 
 .campo label {
   font-weight: 700;
-  color: #cfd3e3;
+  color: var(--cor-tinta);
+  cursor: pointer;
 }
 
 .campo input,
@@ -262,7 +272,7 @@ main {
 .modal__acoes {
   display: flex;
   justify-content: flex-end;
-  margin: 0;
+  margin-top: 1.5rem;
 }
 
 /* 5. Página inicial ------------------------------------------------------ */

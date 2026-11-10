@@ -1,41 +1,46 @@
+
 /* ==========================================================================
-   Career Dreamer — folha de estilos única
+   Career Dreamer — tema escuro com vidro sobre fundo de ondas azuis
    Organização: 1. Variáveis  2. Base  3. Layout  4. Componentes
                 5. Página inicial  6. Página de resultado  7. Acessibilidade
+                8. Fundo animado
    ========================================================================== */
-
+ 
 /* 1. Variáveis ----------------------------------------------------------- */
 :root {
-  --cor-papel: #f6f7fb;
-  --cor-superficie: #ffffff;
-  --cor-tinta: #1b2140;
-  --cor-tinta-suave: #545c7a;
-  --cor-borda: #d9ddec;
-  --cor-primaria: #2f4bd8;
-  --cor-primaria-escura: #2338a8;
+  --cor-papel: #01040f;                       /* fundo da página */
+  --cor-superficie: rgba(8, 22, 56, 0.55);    /* cartões de vidro */
+  --cor-campo: rgba(255, 255, 255, 0.10);     /* inputs */
+  --cor-tinta: #f2f7ff;                       /* texto principal */
+  --cor-tinta-suave: #b4c8e6;                 /* texto secundário */
+  --cor-borda: rgba(255, 255, 255, 0.18);
+  --cor-primaria: #3550e6;
+  --cor-primaria-escura: #2a40c0;
+  --cor-destaque: #5fd3ff;                    /* azul neon das ondas */
   --cor-marca-texto: #ffe066;
-  --cor-sucesso: #127a54;
-  --cor-erro: #c0362c;
-
+  --cor-sucesso: #4fe0a8;
+  --cor-erro: #ff7a70;
+ 
   --fonte-titulo: ui-rounded, "SF Pro Rounded", "Nunito", "Segoe UI", system-ui, sans-serif;
   --fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
+ 
   --raio-pequeno: 8px;
   --raio-grande: 18px;
   --largura-max: 70rem;
+  --vidro: blur(14px) saturate(140%);
 }
-
+ 
 /* 2. Base ---------------------------------------------------------------- */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
+ 
 [hidden] {
   display: none !important;
 }
-
+ 
 body {
   margin: 0;
   min-height: 100vh;
@@ -47,7 +52,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
 }
-
+ 
 h1,
 h2,
 h3,
@@ -56,24 +61,24 @@ h4 {
   font-family: var(--fonte-titulo);
   line-height: 1.2;
 }
-
+ 
 p {
   margin: 0 0 1em;
 }
-
+ 
 a {
-  color: var(--cor-primaria);
+  color: var(--cor-destaque);
 }
-
+ 
 *:focus {
   outline: none;
 }
-
+ 
 *:focus-visible {
-  outline: 3px solid var(--cor-primaria);
+  outline: 3px solid var(--cor-destaque);
   outline-offset: 2px;
 }
-
+ 
 /* 3. Layout -------------------------------------------------------------- */
 .container {
   width: 100%;
@@ -81,16 +86,19 @@ a {
   margin-inline: auto;
   padding-inline: 1rem;
 }
-
+ 
 main {
   flex: 1;
 }
-
+ 
 .topo {
-  background: var(--cor-superficie);
+  background: rgba(10, 30, 70, 0.45);
+  -webkit-backdrop-filter: var(--vidro);
+  backdrop-filter: var(--vidro);
   border-bottom: 1px solid var(--cor-borda);
+  color: #ffffff;
 }
-
+ 
 .topo__conteudo {
   display: flex;
   align-items: center;
@@ -98,7 +106,7 @@ main {
   gap: 1rem;
   padding-block: 0.9rem;
 }
-
+ 
 .rodape {
   padding-block: 1.5rem;
   border-top: 1px solid var(--cor-borda);
@@ -106,41 +114,50 @@ main {
   font-size: 0.875rem;
   text-align: center;
 }
-
+ 
 .rodape p {
   margin: 0;
 }
-
+ 
 /* 4. Componentes --------------------------------------------------------- */
 .marca {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  color: var(--cor-tinta);
+  color: #ffffff;
   font-family: var(--fonte-titulo);
   font-weight: 800;
   font-size: 1.1rem;
   text-decoration: none;
   white-space: nowrap;
 }
-
+ 
 .marca__simbolo {
+  .marca__simbolo {
+  display: block;
+  width: 3.25rem;
+  height: auto;
+}
   display: grid;
   place-items: center;
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
   background: var(--cor-marca-texto);
+  color: #1b2140;
   font-size: 0.95rem;
 }
-
+ 
 .cartao {
   background: var(--cor-superficie);
+  -webkit-backdrop-filter: var(--vidro);
+  backdrop-filter: var(--vidro);
   border: 1px solid var(--cor-borda);
   border-radius: var(--raio-grande);
   padding: clamp(1.25rem, 4vw, 2rem);
+  box-shadow: 0 10px 40px rgba(0, 10, 40, 0.45);
 }
-
+ 
 .subtitulo {
   font-size: 1.15rem;
   margin-top: 2rem;
@@ -148,14 +165,14 @@ main {
   font-family: var(--fonte-titulo);
   font-weight: 700;
 }
-
+ 
 .subtitulo-cartao {
   font-size: 1.5rem;
   margin-bottom: 0.5em;
   font-family: var(--fonte-titulo);
   font-weight: 700;
 }
-
+ 
 .botao {
   display: inline-flex;
   align-items: center;
@@ -169,119 +186,123 @@ main {
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
   width: 100%;
 }
-
+ 
 .botao:hover:not(:disabled) {
   background: var(--cor-primaria-escura);
   border-color: var(--cor-primaria-escura);
+  box-shadow: 0 0 24px rgba(95, 211, 255, 0.35);
 }
-
+ 
 .botao:disabled {
   opacity: 0.65;
   cursor: progress;
 }
-
+ 
 .botao--secundario {
   width: auto;
   white-space: nowrap;
   background: transparent;
-  color: var(--cor-primaria);
+  border-color: var(--cor-destaque);
+  color: var(--cor-destaque);
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
 }
-
+ 
 .botao--secundario:hover:not(:disabled) {
-  background: var(--cor-primaria);
-  color: #ffffff;
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+  color: #01040f;
 }
-
+ 
 /* Formulário */
 .formulario {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
-
+ 
 .campo {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
 }
-
+ 
 .campo label {
   font-weight: 700;
   color: var(--cor-tinta);
   cursor: pointer;
 }
-
+ 
 .campo input,
 .campo textarea {
   width: 100%;
   padding: 0.75rem 0.9rem;
   border: 1.5px solid var(--cor-borda);
   border-radius: var(--raio-pequeno);
-  background: var(--cor-papel);
+  background: var(--cor-campo);
   color: var(--cor-tinta);
   font: inherit;
 }
-
+ 
 .campo textarea {
   min-height: 5.5rem;
   resize: vertical;
 }
-
+ 
 .campo input::placeholder,
 .campo textarea::placeholder {
-  color: #6e7590;
+  color: #8fa6c9;
 }
-
+ 
 .campo input:focus,
 .campo textarea:focus {
-  background: var(--cor-superficie);
+  background: rgba(255, 255, 255, 0.16);
+  border-color: var(--cor-destaque);
 }
-
+ 
 .campo input:user-invalid,
 .campo textarea:user-invalid {
   border-color: var(--cor-erro);
 }
-
+ 
 .dica {
   margin: 0;
   font-size: 0.875rem;
   color: var(--cor-tinta-suave);
 }
-
+ 
 /* Modal (elemento <dialog> nativo) */
 .modal {
   width: min(26rem, 100% - 2rem);
   padding: 1.75rem;
-  border: 0;
+  border: 1px solid var(--cor-borda);
   border-top: 6px solid var(--cor-marca-texto);
   border-radius: var(--raio-grande);
-  background: var(--cor-superficie);
+  background: #0a1838;
   color: var(--cor-tinta);
-  box-shadow: 0 20px 50px rgb(27 33 64 / 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
 }
-
+ 
 .modal::backdrop {
-  background: rgb(27 33 64 / 0.55);
+  background: rgba(1, 4, 15, 0.7);
 }
-
+ 
 .modal__acoes {
   display: flex;
   justify-content: flex-end;
   margin-top: 1.5rem;
 }
-
+ 
 /* 5. Página inicial ------------------------------------------------------ */
 .pagina-inicial {
   display: grid;
   gap: 2rem;
   padding-block: 2.5rem;
 }
-
+ 
 .apresentacao h1,
 .titulo-principal {
   margin: 0 0 0.5em;
@@ -291,14 +312,17 @@ main {
   font-size: clamp(2rem, 5vw, 3.1rem);
   letter-spacing: -0.02em;
   max-width: 16ch;
+  color: #ffffff;
+  text-shadow: 0 2px 24px rgba(1, 4, 15, 0.8);   /* garante leitura sobre as linhas brilhantes */
 }
-
+ 
 .apresentacao__texto {
   max-width: 46ch;
   font-size: 1.1rem;
   color: var(--cor-tinta-suave);
+  text-shadow: 0 1px 12px rgba(1, 4, 15, 0.9);
 }
-
+ 
 .passos {
   margin: 0;
   padding: 0;
@@ -307,8 +331,10 @@ main {
   display: grid;
   gap: 0.75rem;
   max-width: 42ch;
+  color: var(--cor-tinta);
+  text-shadow: 0 1px 12px rgba(1, 4, 15, 0.9);
 }
-
+ 
 .passos li,
 .passos .passo {
   counter-increment: passo;
@@ -316,7 +342,7 @@ main {
   gap: 0.75rem;
   align-items: baseline;
 }
-
+ 
 .passos li::before,
 .passos .passo::before {
   content: counter(passo);
@@ -326,12 +352,13 @@ main {
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  border: 2px solid var(--cor-tinta);
+  border: 2px solid var(--cor-destaque);
+  color: var(--cor-destaque);
   font-family: var(--fonte-titulo);
   font-weight: 800;
   font-size: 0.85rem;
 }
-
+ 
 @media (min-width: 860px) {
   .pagina-inicial {
     grid-template-columns: 1.1fr 1fr;
@@ -340,22 +367,23 @@ main {
     padding-block: 4rem;
   }
 }
-
+ 
 /* 6. Página de resultado ------------------------------------------------- */
 .pagina-resultado {
   padding-block: 2.5rem 4rem;
 }
-
+ 
 .pagina-resultado h1 {
   font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+  color: #ffffff;
 }
-
+ 
 .sintese {
   max-width: 60ch;
   font-size: 1.15rem;
   color: var(--cor-tinta-suave);
 }
-
+ 
 .lista-carreiras {
   margin: 0;
   padding: 0;
@@ -363,21 +391,23 @@ main {
   display: grid;
   gap: 1.25rem;
 }
-
+ 
 .carreira--principal {
-  border: 2px solid var(--cor-tinta);
+  border: 2px solid var(--cor-destaque);
+  box-shadow: 0 0 40px rgba(95, 211, 255, 0.2);
 }
-
+ 
 .carreira__selo {
   display: inline-block;
   margin-bottom: 0.75rem;
   padding: 0.15rem 0.7rem;
   border-radius: 999px;
   background: var(--cor-marca-texto);
+  color: #1b2140;
   font-size: 0.85rem;
   font-weight: 700;
 }
-
+ 
 .carreira__topo {
   display: flex;
   flex-wrap: wrap;
@@ -385,53 +415,54 @@ main {
   justify-content: space-between;
   gap: 0.5rem 1rem;
 }
-
+ 
 .carreira__titulo {
   font-size: 1.4rem;
   margin: 0;
 }
-
+ 
 .carreira__nota {
   margin: 0;
   color: var(--cor-sucesso);
 }
-
+ 
 .carreira__percentual {
   font-family: var(--fonte-titulo);
   font-size: 2rem;
   font-weight: 800;
+  color: var(--cor-destaque);
 }
-
+ 
 .carreira__legenda {
   font-size: 0.875rem;
 }
-
+ 
 .barra {
   height: 10px;
   margin-block: 0.75rem 1rem;
   border-radius: 999px;
-  background: var(--cor-papel);
+  background: rgba(255, 255, 255, 0.12);
   overflow: hidden;
 }
-
+ 
 .barra__nivel {
   display: block;
   width: var(--nivel, 0%);
   height: 100%;
   border-radius: inherit;
-  background: var(--cor-marca-texto);
+  background: linear-gradient(90deg, var(--cor-primaria), var(--cor-destaque));
   transition: width 0.8s ease-out;
 }
-
+ 
 .carreira__resumo {
   max-width: 65ch;
 }
-
+ 
 .carreira h4 {
   margin-top: 1.25rem;
   font-size: 1rem;
 }
-
+ 
 .chips {
   margin: 0;
   padding: 0;
@@ -440,26 +471,27 @@ main {
   flex-wrap: wrap;
   gap: 0.5rem;
 }
-
+ 
 .chips li {
   padding: 0.2rem 0.75rem;
   border: 1px solid var(--cor-borda);
   border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
   font-size: 0.9rem;
 }
-
+ 
 .roteiro {
   margin: 0;
   padding-left: 1.25rem;
   color: var(--cor-tinta-suave);
 }
-
+ 
 .vazio {
   max-width: 34rem;
   margin-inline: auto;
   text-align: center;
 }
-
+ 
 /* 7. Acessibilidade ------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -468,4 +500,15 @@ main {
     transition: none !important;
     animation: none !important;
   }
+}
+ 
+/* 8. Fundo animado ------------------------------------------------------- */
+#fundo-animado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;           /* atrás de tudo */
+  pointer-events: none;  /* cliques passam direto */
 }
